@@ -1,0 +1,341 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+
+.gb-login {
+  min-height: 100vh;
+  padding: 28px 7%;
+  display: flex;
+  flex-direction: column;
+  background: #fffaf7;
+  color: #30232f;
+  font-family: 'DM Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+.gb-login * {
+  box-sizing: border-box;
+}
+
+.gb-header {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.gb-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #30232f;
+  text-decoration: none;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.7px;
+}
+
+.gb-logo-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #713c80;
+  color: white;
+  font-size: 18px;
+}
+
+.gb-header > p {
+  color: #786b77;
+  font-size: 13px;
+}
+
+.gb-header > p a,
+.gb-form-bottom a {
+  color: #a83d78;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.gb-header > p a:hover,
+.gb-form-bottom a:hover {
+  text-decoration: underline;
+}
+
+/* Main layout */
+
+.gb-login-layout {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  padding: 75px 0;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 90px;
+}
+
+/* Welcome section */
+
+.gb-welcome {
+  max-width: 480px;
+}
+
+.gb-small-label {
+  display: inline-block;
+  margin-bottom: 22px;
+  color: #a83d78;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+}
+
+.gb-welcome h1 {
+  margin: 0;
+  color: #30232f;
+  font-size: clamp(38px, 4.5vw, 57px);
+  font-weight: 700;
+  line-height: 1.13;
+  letter-spacing: -2.5px;
+}
+
+.gb-welcome h1 span {
+  color: #a44882;
+}
+
+.gb-welcome-text {
+  max-width: 390px;
+  margin: 24px 0;
+  color: #776a75;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.gb-event-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 34px;
+  color: #665360;
+  font-size: 12px;
+}
+
+.gb-event-dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #d77b45;
+}
+
+/* Login form */
+
+.gb-form-card {
+  width: 100%;
+  max-width: 390px;
+  padding: 36px;
+  border: 1px solid #f0e4e9;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 12px 40px rgba(70, 35, 61, 0.06);
+}
+
+.gb-form-heading {
+  margin-bottom: 30px;
+}
+
+.gb-form-heading h2 {
+  margin: 0 0 9px;
+  color: #30232f;
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.gb-form-heading p {
+  margin: 0;
+  color: #897b87;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.gb-field {
+  margin-bottom: 21px;
+}
+
+.gb-field label {
+  display: block;
+  margin-bottom: 9px;
+  color: #493847;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.gb-field input {
+  width: 100%;
+  height: 47px;
+  padding: 0 13px;
+  border: 1px solid #e8dfe7;
+  border-radius: 8px;
+  outline: none;
+  background: #fffdfd;
+  color: #30232f;
+  font: inherit;
+  font-size: 13px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.gb-field input::placeholder {
+  color: #b4a9b2;
+}
+
+.gb-field input:focus {
+  border-color: #a44882;
+  box-shadow: 0 0 0 3px rgba(164, 72, 130, 0.09);
+}
+
+.gb-login-button {
+  width: 100%;
+  height: 48px;
+  margin-top: 5px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #713c80;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.gb-login-button:hover:not(:disabled) {
+  background: #5e306b;
+  transform: translateY(-1px);
+}
+
+.gb-login-button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.gb-login-button span {
+  font-size: 17px;
+}
+
+.gb-error {
+  margin: 0 0 15px;
+  padding: 10px 12px;
+  border-radius: 7px;
+  background: #fff0f0;
+  color: #b42335;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.gb-form-bottom {
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid #f0e8ed;
+  color: #857783;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Footer */
+
+.gb-footer {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-top: 18px;
+  border-top: 1px solid #f0e5e9;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #93848f;
+  font-size: 11px;
+}
+
+/* Mobile */
+
+@media (max-width: 850px) {
+  .gb-login {
+    padding: 24px 6%;
+  }
+
+  .gb-login-layout {
+    max-width: 480px;
+    padding: 55px 0;
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .gb-welcome h1 {
+    font-size: 43px;
+  }
+
+  .gb-welcome-text {
+    margin: 17px 0;
+  }
+
+  .gb-event-note {
+    margin-top: 22px;
+  }
+
+  .gb-form-card {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .gb-login {
+    padding: 22px 20px;
+  }
+
+  .gb-logo {
+    font-size: 18px;
+  }
+
+  .gb-header > p {
+    font-size: 11px;
+    text-align: right;
+  }
+
+  .gb-login-layout {
+    padding: 45px 0;
+    gap: 28px;
+  }
+
+  .gb-welcome h1 {
+    font-size: 37px;
+    letter-spacing: -1.7px;
+  }
+
+  .gb-welcome-text {
+    font-size: 13px;
+  }
+
+  .gb-form-card {
+    padding: 26px 22px;
+    border-radius: 14px;
+  }
+
+  .gb-form-heading h2 {
+    font-size: 25px;
+  }
+
+  .gb-footer {
+    flex-direction: column;
+    font-size: 10px;
+  }
+}
