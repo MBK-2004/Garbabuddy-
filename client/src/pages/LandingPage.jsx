@@ -5,13 +5,13 @@ const features = [
   {
     icon: '♧',
     title: 'Meet Real Students',
-    description: 'Connect with genuine IIT (BHU) peers, not strangers.',
+    description: 'Real IIT (BHU) people. Not random NPCs from the internet.',
     color: 'pink',
   },
   {
     icon: '♡',
     title: 'Match Your Vibe',
-    description: 'Find people who share your dance style, interests & energy.',
+    description: 'Your dance chemistry should be better than your lab chemistry.',
     color: 'purple',
   },
   {
@@ -23,7 +23,7 @@ const features = [
   {
     icon: '♢',
     title: 'Safe & Friendly',
-    description: 'A trusted space with real profiles and campus community.',
+    description: 'Verified campus vibes. No mysterious magical profiles.',
     color: 'rose',
   },
 ]
@@ -34,14 +34,14 @@ const steps = [
     icon: '♙',
     title: '1. Create your profile',
     description:
-      "Tell us about yourself — your interests, dance experience, and what you're looking for.",
+      "Create your profile. No résumé or CGPA required.",
   },
   {
     number: '02',
     icon: '⌕',
     title: '2. Discover matches',
     description:
-      'Explore students from IIT (BHU) based on your preferences.',
+      'Explore students from IIT (BHU) .',
   },
   {
     number: '03',
@@ -83,7 +83,7 @@ function LandingPage() {
             </a>
             <a href="#how">How It Works</a>
             <a href="#about">About</a>
-            <a className="nav-cta" href="/signup">
+            <a className="nav-cta" href="/login">
               Get Started <span>→</span>
             </a>
           </div>
@@ -106,14 +106,12 @@ function LandingPage() {
             <div className="headline-underline" />
 
             <p className="hero-description">
-              Find your Garba partner or crew at IIT (BHU).
-              Meet new friends, share the same vibe,
-              and make this Navratri unforgettable.
+             Single in life? At least don't be single in Garba.
             </p>
 
             <div className="hero-actions">
-              <a href="/signup" className="primary-button">
-                <span>♧</span> Find Your Buddy <span>→</span>
+              <a href="/login" className="primary-button">
+                <span>♧</span> Find Your insaan <span>→</span>
               </a>
 
               <a href="#how" className="secondary-button">
@@ -187,7 +185,7 @@ function LandingPage() {
         </h2>
 
         <p className="how-subtitle">
-          Just 3 easy steps to find your Garba buddy.
+       3 easy steps. Not dance audition steps.
         </p>
 
         <div className="steps-grid">
@@ -221,7 +219,7 @@ function LandingPage() {
           <h2>Ready to find your Garba buddy?</h2>
           <p>Your people. Your rhythm. Your IIT (BHU).</p>
 
-          <a href="/signup" className="cta-button">
+          <a href="/login" className="cta-button">
             Get Started <span>→</span>
           </a>
         </div>

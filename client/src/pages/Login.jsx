@@ -11,50 +11,73 @@ function Login() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const handleLogin = async (e) => {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
+  
 
-    try {
-      const response = await fetch(
-        'http://localhost:5000/api/auth/login',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      )
+const handleLogin = async (e) => {
+  e.preventDefault()
+  setError('')
+  setLoading(true)
 
-     const responseText = await response.text();
-
-  console.log('Status:', response.status);
-  console.log(
-    'Content-Type:',
-    response.headers.get('content-type')
-  );
-  console.log('Backend response:', responseText);
-
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Unable to log in.')
+  try {
+    // 1. Log in the user
+    const response = await fetch(
+      'http://localhost:5000/api/auth/login',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
       }
+    )
 
-      if (data.token) {
-        localStorage.setItem('token', data.token)
-      }
+    const data = await response.json()
 
-      navigate('/home')
-    } catch (err) {
-      setError(
-        err.message || 'Something went wrong. Please try again.'
-      )
-    } finally {
-      setLoading(false)
+    if (!response.ok) {
+      throw new Error(data.message || 'Unable to log in.')
     }
+
+    // 2. Save the login token and user details
+    localStorage.setItem('token', data.token)
+    localStorage.setItem('user', JSON.stringify(data.user))
+
+    // 3. Fetch the user's saved profile
+    const profileResponse = await fetch(
+      'http://localhost:5000/api/auth/profile',
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      }
+    )
+
+    const profileData = await profileResponse.json()
+
+    if (!profileResponse.ok) {
+      throw new Error(
+        profileData.message || 'Could not check your profile.'
+      )
+    }
+
+    // 4. Navigate according to profile completion
+    if (profileData.profileComplete) {
+    
+      navigate('/home')
+    } else {
+    
+      navigate('/profile')
+    }
+
+  } catch (err) {
+   
+    setError(err.message || 'Something went wrong. Please try again.')
+  } finally {
+    setLoading(false)
   }
+}
+
+
 
   return (
     <main className="gb-login">
@@ -69,7 +92,7 @@ function Login() {
 
       <section className="gb-login-layout">
         <div className="gb-welcome">
-          <span className="gb-small-label">GARBA NIGHT, SORTED.</span>
+          <span className="gb-small-label">GARBA NIGHT  KA KUCH KARTE HAI</span>
 
           <h1>
             Find your people.

@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
-
+const requestRoutes = require('./routes/requests');
+const chatRoutes = require('./routes/chat');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -25,6 +26,10 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 
+app.use('/api/requests', requestRoutes);
+
+
+app.use('/api/chat', chatRoutes);
 
 app.get('/', (req, res) => {
   res.send('Garba Buddy backend is running!');
