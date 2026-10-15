@@ -39,7 +39,7 @@ function Profile() {
       }
 
       const response = await fetch(
-        'http://localhost:5000/api/auth/profile',
+        'https://garbabuddy.onrender.com/api/auth/profile',
         {
           method: 'POST',
           headers: {

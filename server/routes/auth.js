@@ -116,7 +116,7 @@ router.post('/signup', async (req, res) => {
 });
 
     const verificationLink =
-      `http://localhost:5000/api/auth/verify-email` +
+      `https://garbabuddy.onrender.com/api/auth/verify-email` +
       `?token=${verificationToken}` +
       `&email=${encodeURIComponent(normalizedEmail)}`;
 

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './HomePage.css';
 
-const API = 'http://localhost:5000/api';
+const API = 'https://garbabuddy.onrender.com/api';
 
 function getStoredUserId() {
   try {

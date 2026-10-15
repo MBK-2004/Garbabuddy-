@@ -21,7 +21,7 @@ const handleLogin = async (e) => {
   try {
     // 1. Log in the user
     const response = await fetch(
-      'http://localhost:5000/api/auth/login',
+      'https://garbabuddy.onrender.com/api/auth/login',
       {
         method: 'POST',
         headers: {
@@ -43,7 +43,7 @@ const handleLogin = async (e) => {
 
     // 3. Fetch the user's saved profile
     const profileResponse = await fetch(
-      'http://localhost:5000/api/auth/profile',
+      '/api/auth/profile',
       {
         method: 'GET',
         headers: {
