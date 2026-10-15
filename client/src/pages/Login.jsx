@@ -43,7 +43,7 @@ const handleLogin = async (e) => {
 
     // 3. Fetch the user's saved profile
     const profileResponse = await fetch(
-      '/api/auth/profile',
+      'https://garbabuddy.onrender.com/api/auth/profile',
       {
         method: 'GET',
         headers: {
