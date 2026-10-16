@@ -74,6 +74,8 @@ try {
         password: '',
         confirmPassword: '',
       });
+
+      navigate('/login');
     } catch (error) {
       setMessage(
         error.message === 'Failed to fetch'
