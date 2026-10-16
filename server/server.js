@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'https://garbabuddy-chi.vercel.app','https://garbabuddy-9uzv7j0qe-garba4.vercel.app'],
+    origin: ['http://localhost:5173', 'https://garbabuddy-chi.vercel.app','https://garbabuddy-9uzv7j0qe-garba4.vercel.app', 'https://garbabuddy-pc5536q6z-garba4.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
