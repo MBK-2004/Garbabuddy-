@@ -14,7 +14,17 @@ const transporter = nodemailer.createTransport({
 });
 
 async function sendEmail({ to, subject, text, html }) {
+ try {
   await transporter.verify();
+  console.log('SMTP connection verified successfully');
+} catch (error) {
+  console.error('SMTP verification failed:', {
+    code: error.code,
+    command: error.command,
+    message: error.message,
+  });
+  throw error;
+}
 
   return transporter.sendMail({
     from: `"Garba Buddy" <${process.env.EMAIL_USER}>`,
