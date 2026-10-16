@@ -43,10 +43,9 @@ function authenticateToken(req, res, next) {
 }
 
 
+
+
 router.post('/signup', async (req, res) => {
-
-  let user;
-
   try {
     const { name, email, password } = req.body;
 
@@ -86,68 +85,22 @@ router.post('/signup', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Generate a secure verification token.
-    const verificationToken = crypto.randomBytes(32).toString('hex');
-
-    // Store only the hash, not the original token.
-    const verificationTokenHash = crypto
-      .createHash('sha256')
-      .update(verificationToken)
-      .digest('hex');
-
-    user = await User.create({
+    // Temporarily disable email verification.
+    const user = await User.create({
       name: name.trim(),
       email: normalizedEmail,
       password: hashedPassword,
-      isVerified: false,
-      verificationTokenHash,
-      verificationTokenExpires: new Date(
-        Date.now() + 60 * 60 * 1000
-      ), // Expires in 1 hour
-    });
-    console.log('USER CREATED CHECK:', {
-  id: user._id.toString(),
-  email: user.email,
-  isVerified: user.isVerified,
-  hasTokenHash: Boolean(user.verificationTokenHash),
-  tokenExpiry: user.verificationTokenExpires,
-  database: User.db.name,
-  collection: User.collection.name,
-});
-
-    const verificationLink =
-      `https://garbabuddy.onrender.com/api/auth/verify-email` +
-      `?token=${verificationToken}` +
-      `&email=${encodeURIComponent(normalizedEmail)}`;
-
-    await sendEmail({
-      to: normalizedEmail,
-      subject: 'kudka email to verify karo',
-      text:
-        `Hi ${user.name},\n\n` +
-        `kisi or ko pehle dhundne se pehle tum tum hi ho na ye to pehle hame dhundene do ,so pls verify using this \n${verificationLink}\n\n` +
-        `This link expires in 1 hour.`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 560px; margin: auto; padding: 24px;">
-          <h2>Welcome buddy!</h2>
-          <p>Hi ${user.name.replace(/[&<>"']/g, '')},</p>
-          <p>Please verify your college email to continue.</p>
-          <p>
-            <a href="${verificationLink}"
-               style="display:inline-block;padding:12px 20px;background:#7c3aed;color:#fff;text-decoration:none;border-radius:8px;">
-              Verify my email
-            </a>
-          </p>
-          <p>This link expires in 1 hour.</p>
-          <p>If you did not create this account, you can ignore this email.</p>
-        </div>
-      `,
+      isVerified: true,
     });
 
-    console.log('Verification email sent to:', normalizedEmail);
+    console.log('USER SIGNUP SUCCESS:', {
+      id: user._id.toString(),
+      email: user.email,
+      isVerified: user.isVerified,
+    });
 
     return res.status(201).json({
-      message: 'Account created! Check your college email for the verification link.',
+      message: 'Account created successfully! You can now log in.',
       user: {
         id: user._id,
         name: user.name,
@@ -156,19 +109,7 @@ router.post('/signup', async (req, res) => {
       },
     });
   } catch (error) {
-    console.error('Signup error:', error.message);
-
-    // Avoid leaving a newly created account stuck if email delivery fails.
-    if (user && !user.isVerified) {
-      try {
-        await User.deleteOne({
-          _id: user._id,
-          isVerified: false,
-        });
-      } catch (cleanupError) {
-        console.error('Account cleanup failed:', cleanupError.message);
-      }
-    }
+    console.error('Signup error:', error);
 
     if (error.code === 11000) {
       return res.status(409).json({
@@ -177,10 +118,12 @@ router.post('/signup', async (req, res) => {
     }
 
     return res.status(500).json({
-      message: 'Could not complete signup or send the verification email. Please try again.',
+      message: 'Could not create your account. Please try again.',
     });
   }
 });
+
+
 
 // Verify the email when the student clicks the emailed link.
 
@@ -270,8 +213,10 @@ router.get('/verify-email', async (req, res) => {
 });
 
 // Login existing users
+
 router.post('/login', async (req, res) => {
-    console.log('LOGIN ROUTE REACHED');
+  console.log('LOGIN ROUTE REACHED');
+
   try {
     const { email, password } = req.body;
 
@@ -296,7 +241,7 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    // 4. Check password against stored hash
+    // 4. Check password
     const passwordMatches = await bcrypt.compare(
       password,
       user.password
@@ -308,22 +253,14 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    // 5. Require email verification
-    if (!user.isVerified) {
-      return res.status(403).json({
-        message: 'Please verify your college email before logging in.',
-      });
-    }
-
-    // 6. Login successful
-   
-    // 6. Login successful: generate an authentication token
+    // 5. Generate authentication token
     const token = jwt.sign(
       { userId: user._id.toString() },
       process.env.JWT_SECRET,
       { expiresIn: '1d' }
     );
 
+    // 6. Login successful
     return res.status(200).json({
       message: 'Login successful!',
       token,
